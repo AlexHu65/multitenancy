@@ -1,7 +1,7 @@
 @php
 $links = [
     [
-        'name' => 'Dashboad',
+        'name' => 'Dashboard',
         'url' => route('dashboard'),
         'active' => request()->routeIs('dashboard')
     ],
