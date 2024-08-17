@@ -31,7 +31,7 @@ class TenantController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'id' => 'required'
+            'id' => 'required|unique:tenants'
         ]);
 
         $tenant =  Tenant::create($request->all());
