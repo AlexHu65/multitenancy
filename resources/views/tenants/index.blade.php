@@ -6,8 +6,6 @@
     </x-slot>
     
     <x-container class="py-10">
-
-        
         @if (session('success'))
             <div class="py-5">
                 <div class="bg-teal-100 border-t-4 border-teal-500 rounded-b text-teal-900 px-4 py-3 shadow-md" role="alert">
@@ -20,11 +18,45 @@
               </div>
             </div>
         @endif
-        <div class="flex justify-end">
+        <div class="flex justify-end mb-6">
             <a href={{route('tenants.create')}} class="btn btn-blue">
                 Nuevo
             </a>
         </div>
+        <div class="relative overflow-x-auto">
+            <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
+                <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+                    <tr>
+                        <th scope="col" class="px-6 py-3">
+                            Nombre
+                        </th>
+                        <th scope="col" class="px-6 py-3">
+                            Dominio
+                        </th>
+                        <th scope="col" class="px-6 py-3">
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach ($tenants as $tenant)
+                    <tr class="bg-white dark:bg-gray-800">
+                        <th scope="row" class="px-6 py-4 font-medium text-gray-900 dark:text-white">
+                            {{ $tenant->id }}
+                        </th>
+                        <th scope="row" class="px-6 py-4 font-medium text-gray-900 dark:text-white">
+                            {{ $tenant->domains->first()->domain ?? '' }}
+                        </th>
+                        <th scope="row" class="px-6 py-4 font-medium text-gray-900 dark:text-white">
+                            {{-- Actions --}}
+                            <div class="flex justify-end">
+                                <a href="{{route('tenants.edit', $tenant)}}" type="button" class="mx-3 btn btn-green">Editar</a>
+                                <a href="{{route('tenants.destroy', $tenant)}}" type="button" class="btn btn-red">Eliminar</a>
+                            </div>
+                        </th>
+                    </tr>
+                    @endforeach
+                </tbody>
+            </table>
+        </div>
     </x-container>
-
 </x-app-layout>
